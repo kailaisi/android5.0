@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/btn_plus"
+            android:icon="@android:drawable/btn_plus"
+            android:title="4.0"/>
+        <item  android:id="@+id/btn_default"
+            android:icon="@android:drawable/btn_default"
+            android:title="二级">
+            <menu>
+                <item
+                    android:id="@+id/btn_minus"
+                    android:icon="@android:drawable/btn_minus"
+                    android:title="5.0"/>
+                <item  android:id="@+id/btn_star"
+                    android:icon="@android:drawable/btn_star"
+                    android:title="6.0"/>
+            </menu>
+        </item>
+    </group>
+</menu>
