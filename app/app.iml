@@ -108,8 +108,8 @@
     <orderEntry type="library" exported="" name="antlr4-annotations-4.4" level="project" />
     <orderEntry type="library" exported="" name="discrete-seekbar-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="antlr4-4.4" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.1" level="project" />
+    <orderEntry type="library" exported="" name="antlr4-4.4" level="project" />
     <orderEntry type="library" exported="" name="systembartint-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="antlr-runtime-3.5.2" level="project" />
     <orderEntry type="library" exported="" name="kotlin-stdlib-0.11.91" level="project" />
