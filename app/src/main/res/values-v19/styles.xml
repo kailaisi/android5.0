@@ -3,13 +3,5 @@
 
     <!-- Base application theme. -->
     <style name="AppThemeForFive" parent="AppTheme">
-        <!-- translucent system bars-->
-        <item name="android:windowTranslucentStatus" >true</item>
-        <item name="android:fitsSystemWindows" >true</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
-    <!-- <item name="android:windowTranslucentNavigation">true</item>-->
-    <color name="red">#f00</color>
-    <color name="green">#ff0</color>
 </resources>

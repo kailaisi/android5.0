@@ -9,7 +9,6 @@ import android.widget.Button;
 
 import com.jiuan.android50.databinding.DataBindActivity;
 import com.jiuan.android50.design.MaterialActivity;
-import com.jiuan.android50.utils.StatusBarCompat;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         this.btnrecycleView = (Button) findViewById(R.id.btn_recycleView);
         this.btnmaterial = (Button) findViewById(R.id.btn_material);
         initData();
-        StatusBarCompat.compat(this);
     }
 
     private void initData() {

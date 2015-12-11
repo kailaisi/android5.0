@@ -14,15 +14,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.jiuan.android50.R;
-import com.jiuan.android50.utils.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +44,6 @@ public class MaterialActivity extends AppCompatActivity {
         intiViews();
         initToolbar();
         initViewPager();
-        StatusBarCompat.compat(this);
     }
 
     private void initToolbar() {
