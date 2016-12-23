@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.jiuan.android50.R;
-import com.jiuan.android50.RecyleAdapter;
+import com.jiuan.android50.RecyclerAdapter;
 import com.jiuan.android50.domain.Cheeses;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class detailedActivity extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mData = new ArrayList<>();
         mData.addAll(Arrays.asList(Cheeses.NAMES));
-        mRecyclerView.setAdapter(new RecyleAdapter(this, mData));
+        mRecyclerView.setAdapter(new RecyclerAdapter(this, mData));
     }
 
     @Override

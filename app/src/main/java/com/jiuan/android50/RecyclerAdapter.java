@@ -6,23 +6,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nineoldandroids.animation.ObjectAnimator;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by wu on 2015/12/7.
  */
-public class RecyleAdapter extends RecyclerView.Adapter<RecyleAdapter.myViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myViewHolder> implements ItemTouchHelperAdapter {
     private OnItemClickListener mListener;
     private int lastPosition = -1;
     private Context mContext;
     private List<String> mData;
 
-    public RecyleAdapter(Context context, List<String> mData) {
+    public RecyclerAdapter(Context context, List<String> mData) {
         mContext = context;
         this.mData = mData;
     }
@@ -31,21 +32,6 @@ public class RecyleAdapter extends RecyclerView.Adapter<RecyleAdapter.myViewHold
         this.mListener = listener;
     }
 
-    public void clearDatas() {
-        int size = mData.size();
-        if (size > 0) {
-            for (int i = 0; i < size; i++) {
-                mData.remove(0);
-            }
-
-            notifyItemRangeRemoved(0, size);
-        }
-    }
-
-    public void addDatas(List<String> datas) {
-        mData.addAll(datas);
-        notifyItemRangeInserted(0, datas.size() - 1);
-    }
 
     public void addData(int position) {
         mData.add(position, "Insert One");
@@ -57,38 +43,36 @@ public class RecyleAdapter extends RecyclerView.Adapter<RecyleAdapter.myViewHold
         notifyItemRemoved(position);
     }
 
-    public String getData(int position){
-        return  mData.get(position);
+    public String getData(int position) {
+        return mData.get(position);
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position % 3 == 0) {
+            return R.layout.item_recyle;
+        } else {
+            return R.layout.item_recyle_left;
+        }
+    }
+
     @Override
     public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recyle, parent, false);
-        myViewHolder holder = new myViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(viewType, parent, false);
+
+        final myViewHolder holder = new myViewHolder(view);
+        holder.tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, holder.getAdapterPosition() + "", Toast.LENGTH_SHORT).show();
+            }
+        });
         return holder;
     }
 
     @Override
     public void onBindViewHolder(myViewHolder holder, final int position) {
-        holder.tv.setText(mData.get(position));
-        setAnimation(holder.container, position);
-        holder.tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.onItemClick(v, position);
-                }
-            }
-        });
-        holder.tv.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mListener != null) {
-                    mListener.onItemLongClick(v, position);
-                }
-                return true;
-            }
-        });
-
+        holder.bind(mData.get(position), position);
     }
 
     @Override
@@ -116,6 +100,19 @@ public class RecyleAdapter extends RecyclerView.Adapter<RecyleAdapter.myViewHold
         holder.container.clearAnimation();
     }
 
+    @Override
+    public boolean onItemMove(int from, int to) {
+        Collections.swap(mData, from, to);
+        notifyItemMoved(from, to);
+        return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public static class myViewHolder extends RecyclerView.ViewHolder {
         public TextView tv;
         public CardView container;
@@ -124,6 +121,17 @@ public class RecyleAdapter extends RecyclerView.Adapter<RecyleAdapter.myViewHold
             super(itemView);
             tv = (TextView) itemView.findViewById(R.id.tv_name);
             container = (CardView) itemView.findViewById(R.id.item_layout_container);
+        }
+
+        public void bind(String s, int position) {
+            tv.setText(s);
+            setAnimation(container, position);
+        }
+
+        public void setAnimation(View viewToAnimate, int position) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(viewToAnimate, "translationX", -viewToAnimate.getMeasuredWidth(), 0);
+            animator.setDuration(300);
+            animator.start();
         }
     }
 

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.jiuan.android50.behavior.BehaviorActivity;
-import com.jiuan.android50.databinding.DataBindActivity;
 import com.jiuan.android50.design.MaterialActivity;
 
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         btndatabind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DataBindActivity.class));
+
             }
         });
         btnbehavior.setOnClickListener(new View.OnClickListener() {

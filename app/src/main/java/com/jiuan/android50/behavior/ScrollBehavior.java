@@ -28,6 +28,7 @@ public class ScrollBehavior extends CoordinatorLayout.Behavior<View> {
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
         int offset=dependency.getTop()-child.getTop();
+        dependency.getX();
         ViewCompat.offsetTopAndBottom(child, offset);
         return true;
     }
