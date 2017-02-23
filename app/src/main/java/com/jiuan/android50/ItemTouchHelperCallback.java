@@ -1,5 +1,6 @@
 package com.jiuan.android50;
 
+import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -26,6 +27,11 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         int dragFlag=ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT;//拖拽
         int swipt=ItemTouchHelper.START|ItemTouchHelper.END;//拖拽删除的方向
         return makeMovementFlags(dragFlag,swipt);
+    }
+
+    @Override
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override

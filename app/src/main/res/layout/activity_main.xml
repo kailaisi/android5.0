@@ -9,12 +9,14 @@
         android:id="@+id/btn_material"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="进入5.0特效"/>
+        android:text="进入5.0特效"
+        android:background="@drawable/bg_login"/>
     <Button
         android:id="@+id/btn_recycleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RecyclerView的使用"/>
+        android:text="RecyclerView的使用"
+        android:background="@drawable/bg_ripple"/>
     <Button
         android:id="@+id/btn_databind"
         android:layout_width="match_parent"

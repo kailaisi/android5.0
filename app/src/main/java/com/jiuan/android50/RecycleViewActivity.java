@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.jiuan.android50.Views.BaseRecyclerViewAdapter;
+import com.jiuan.android50.Views.BaseViewHolder;
 import com.jiuan.android50.domain.Cheeses;
 
 import java.util.ArrayList;
@@ -36,25 +40,50 @@ public class RecycleViewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 //        idRecyclerview.setLayoutManager(new LinearLayoutManager(this));//listview样式
 //        idRecyclerview.setLayoutManager(new GridLayoutManager(this,3));//gridview样式
-        idRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));//固定行或者固定列
+        idRecyclerview.setLayoutManager(new LinearLayoutManager(this));//固定行或者固定列
         idRecyclerview.setItemAnimator(new DefaultItemAnimator());
         initData();
         idRecyclerview.setHasFixedSize(true);
-        mAdapter = new RecyclerAdapter(RecycleViewActivity.this,mData);
+        mAdapter = new RecyclerAdapter(RecycleViewActivity.this, mData);
         mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Snackbar.make(view,position+"",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, position + "", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Snackbar.make(view,position+"",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, position + "", Snackbar.LENGTH_LONG).show();
             }
         });
-        idRecyclerview.setAdapter(mAdapter);
+        TextView textView = new TextView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(300, 400);
+        textView.setLayoutParams(params);
+        textView.setText("空");
+        BaseRecyclerViewAdapter adapter=new BaseRecyclerViewAdapter<String,BaseViewHolder>(mData,this, mOpenLoadMore) {
+
+
+            @Override
+            public int getItemLayout() {
+                return R.layout.item_recyle;
+            }
+
+            @Override
+            protected void convert(BaseViewHolder viewHolder, String s) {
+                viewHolder.setText(R.id.tv_name,s);
+            }
+        };
+        adapter.setmListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View root, int position) {
+                Snackbar.make(root, position + "", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        adapter.addFootView(textView);
+        adapter.addHeadView(textView);
+        idRecyclerview.setAdapter(adapter);
         //将拖拽功能和recycleview进行绑定
-        ItemTouchHelper.Callback callback=new ItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(adapter);
         ItemTouchHelper help = new ItemTouchHelper(callback);
         help.attachToRecyclerView(idRecyclerview);
 
